@@ -2,23 +2,58 @@
 navigationLabel: Home
 ---
 
-# Home
+<SiteMetaData>
+{siteMetadata => {
+  const { name, description } = siteMetadata
+  return (
+        <Fragment>
+        <Heading variant='styles.h1'>{name}</Heading>
+        <Text>{description}</Text>
+        </Fragment>
+  )
+}}
+</SiteMetaData>
 
-This is `src/pages/index.mdx`
+<Divider />
 
-Code snippets can themed, see `gatsby-plugin-theme-ui/index.js`
+<Alert variant='success'>Welcome to my site, stranger.</Alert>
 
-```javascript
-<SourceList>
-  {source => (
-    <ul>
-      {source.map((edge, index) => {
-        const {
-          frontmatter: { title }
-        } = edge.node;
-        return <li key={index}>{title}</li>;
-      })}
-    </ul>
-  )}
-</SourceList>
-```
+<Divider />
+<Divider />
+
+## About
+
+I'm Hayden. I'm a software &amp; DevOps engineer and syadmin from Sheffield, UK.
+
+I'm also a team lead on the Rocky Linux project, and am 110% pro-open-source!
+
+<Divider />
+
+<Flex sx={{ flexWrap: "wrap" }}>  
+  <Box
+    sx={{
+      width: ["100%", "100%", "55%"],
+      mb: 3,
+      pr: [0,0, 4],
+    }}
+  >
+
+  ## Contact
+
+  <Heading variant='styles.h3' sx={{mb: 0}}>Email</Heading>
+  <Link href='mailto:******@gmail.com' variant='styles.a'>******@gmail.com</Link>
+  <Divider />
+
+  </Box>
+
+  <Box
+    sx={{
+      width: ["100%", "100%", "45%"],
+      mb: 3
+    }}
+  >
+
+
+
+  </Box>
+</Flex>
