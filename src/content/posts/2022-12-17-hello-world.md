@@ -1,8 +1,7 @@
 ---
 title: Hello, world!
-date: 2022-12-17
 description: Every great journey begins with a single step.
-readingTime: true
+pubDate: 'Dec 17 2022'
 ---
 
 > Every great journey begins with a single step.

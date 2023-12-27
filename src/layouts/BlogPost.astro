@@ -1,11 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Page from '../components/Page.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_TITLE } from '../consts';
 
-type Props = CollectionEntry<'posts'>['data'];
+type Props = CollectionEntry<'posts'>;
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { data, id } = Astro.props;
+const { title, description, pubDate } = data;
 ---
 
 <Page title={`${title} - ${SITE_TITLE}`} description={description}>
@@ -22,4 +24,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   </div>
 
   <footer class="content__footer"></footer>
+
+  <div class="aside__content" slot="aside">
+    <p>{description}</p>
+    <span style="color: var(--base03)">
+      <FormattedDate date={pubDate} />
+      (<a href={`https://github.com/hbjydev/hbjy.dev/blob/main/src/content/${id}`}>Source</a>)
+    </span>
+  </div>
 </Page>

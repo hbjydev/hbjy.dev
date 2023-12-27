@@ -1,8 +1,7 @@
 ---
 title: Building a Hugo site with Nix
-date: 2023-12-18
+pubDate: 'Dec 18 2023'
 description: How I learned to build up a Hugo site using Nix.
-readingTime: true
 ---
 
 So when the time came to rebuild this blog with [Hugo](https://gohugo.io), I

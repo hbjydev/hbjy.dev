@@ -1,6 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import About from '../components/About.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
@@ -29,13 +30,16 @@ interface Props {
       <section class="page__aside">
         <About />
 
-        <div class="aside__content">
-        </div>
+        <slot name="aside">
       </section>
 
       <footer class="page__footer">
+        <Footer />
 
+        <slot name="footer">
       </footer>
+
+      <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a651b2be970e42ae99fef0022c3b053d"}'></script>
     </div>
   </body>
 </html>
