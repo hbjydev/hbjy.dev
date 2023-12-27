@@ -8,19 +8,37 @@
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          inherit (pkgs) nodejs_21 corepack_21;
+          inherit (pkgs) nodejs_21 corepack_21 node2nix;
           name = "example";
           version = "0.1.0";
+          nodeDependencies = (pkgs.callPackage ./nix/override.nix {
+            inherit pkgs system;
+          }).nodeDependencies;
         in
         {
           devShells = {
             default = pkgs.mkShell {
-              buildInputs = [ nodejs_21 corepack_21 ];
+              buildInputs = [ nodejs_21 corepack_21 node2nix ];
               inputsFrom = [];
             };
           };
 
-          packages = {};
+          packages = {
+            default = pkgs.stdenv.mkDerivation {
+              inherit version;
+              name = "hbjy.dev";
+              src = ./.;
+              buildInputs = [ nodejs_21 ];
+
+              buildPhase = ''
+                ln -s ${nodeDependencies}/lib/node_modules ./node_modules
+                export PATH="${nodeDependencies}/bin:$PATH"
+
+                astro check && astro build
+                cp -r dist $out/
+              '';
+            };
+          };
         };
     };
 }
