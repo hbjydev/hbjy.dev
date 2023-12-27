@@ -1,0 +1,44 @@
+---
+import Page from '../../components/Page.astro';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_DESCRIPTION } from '../../consts';
+
+const posts = (await getCollection('posts')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+
+const isLast = (len: number, idx: number) => {
+  return (len - 1) == idx;
+};
+---
+
+<Page title={"Posts - hayden's home"} description={SITE_DESCRIPTION}>
+  <header class="content__header">
+    <h1>Posts</h1>
+    <p style="color: var(--base03)">
+      Showing {posts.length} posts of {posts.length}.
+    </p>
+  </header>
+
+  {posts.map((post, idx) => (
+    <>
+      <article class="post">
+        <header class="post__header">
+          <h2><a href={`/posts/${post.slug}/`}>{post.data.title}</a></h2>
+          <p class="post__meta">
+            <span class="date">
+              <FormattedDate date={post.data.pubDate} />
+            </span>
+          </p>
+        </header>
+      </article>
+
+      <section class="post__summary">
+        { post.data.description }
+      </section>
+
+      { !isLast(posts.length, idx) ? <hr /> : null }
+    </>
+  ))}
+</Page>

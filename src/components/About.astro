@@ -1,0 +1,26 @@
+---
+import { SITE_NAME, SITE_DESCRIPTION, SOCIAL_LINKS } from "../consts";
+---
+
+<div class="aside__about">
+  <!-- {{ with .logo }}<img class="about__logo" src="{{ . | absURL }}" alt="Logo">{{ end }} -->
+  <img class="about__logo" src="/favicon-16x16.png" alt="Logo" />
+  <h1 class="about__title">{ SITE_NAME }</h1>
+  <p class="about__description">{ SITE_DESCRIPTION }</p>
+</div>
+
+<ul class="aside__social-links">
+  <!-- Social links -->
+  {SOCIAL_LINKS.map(v => (
+    <li>
+      <a
+        href={v.url}
+        rel="me"
+        aria-label={v.title}
+        title={v.title}
+      ><i class={v.icon} aria-hidden="true"></i></a>&nbsp;
+    </li>
+  ))}
+</ul>
+
+<hr />

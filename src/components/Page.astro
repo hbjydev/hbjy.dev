@@ -1,0 +1,41 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import About from '../components/About.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  content?: ChildNode;
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+
+  <body>
+    <div class="page">
+      <Header />
+
+      <section class="page__body">
+        <slot>
+      </section>
+
+      <section class="page__aside">
+        <About />
+
+        <div class="aside__content">
+        </div>
+      </section>
+
+      <footer class="page__footer">
+
+      </footer>
+    </div>
+  </body>
+</html>
