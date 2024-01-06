@@ -8,35 +8,40 @@
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          inherit (pkgs) nodejs_21 corepack_21 node2nix;
-          name = "example";
+          inherit (pkgs) nodejs_21 python3 pkg-config vips buildNpmPackage;
+          name = "hbjy.dev";
           version = "0.1.0";
-          nodeDependencies = (pkgs.callPackage ./nix/override.nix {
-            inherit pkgs system;
-          }).nodeDependencies;
         in
         {
           devShells = {
             default = pkgs.mkShell {
-              buildInputs = [ nodejs_21 corepack_21 node2nix ];
+              buildInputs = [ nodejs_21 ];
               inputsFrom = [];
             };
           };
 
           packages = {
-            default = pkgs.stdenv.mkDerivation {
+            default = buildNpmPackage {
+              pname = "${name}";
               inherit version;
-              name = "hbjy.dev";
               src = ./.;
-              buildInputs = [ nodejs_21 ];
 
-              buildPhase = ''
-                ln -s ${nodeDependencies}/lib/node_modules ./node_modules
-                export PATH="${nodeDependencies}/bin:$PATH"
+              buildInputs = [ vips ];
+              nativeBuildInputs = [
+                python3
+                pkg-config
+                vips
+              ];
 
-                astro check && astro build
-                cp -r dist $out/
+              installPhase = ''
+                cp -r dist $out
               '';
+
+              dontNpmInstall = true;
+              makeCacheWritable = true;
+              npmDepsHash = "sha256-Zu9R9+CsN9RY0EOs3uDTdvpsaTJywKugwp0e3sqfAyg=";
+              npmPackFlags = [ "--ignore-scripts" ];
+              NODE_OPTIONS = "--openssl-legacy-provider";
             };
           };
         };
