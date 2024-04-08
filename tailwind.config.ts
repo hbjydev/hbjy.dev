@@ -44,6 +44,13 @@ export default {
             h1: {
               color: theme('colors.white'),
             },
+
+            hr: {
+              'border-color': 'var(--base02)',
+              'width': 'calc(100vw - 1em)',
+              'margin': '2em -1.25em',
+            },
+
             blockquote: {
               "border-inline-start-color": 'var(--base03)',
               "font-style": "normal",

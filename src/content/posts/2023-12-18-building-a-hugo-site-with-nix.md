@@ -10,6 +10,8 @@ general-purpose tasks, like generating a static site with a generator. There
 were some bumps along the way, but for the most part, having my builds be
 declarative & reproducible was a good idea, I think.
 
+---
+
 It all starts out with a Hugo site. If you've not got one, they have a
 [great guide for that](https://gohugo.io/getting-started/quick-start/). Once
 you have that, you can move on to configuring a Nix flake. All I did to start
@@ -54,6 +56,8 @@ worked. It seemed to do what I wanted, it lets you run a series of commands and
 populate a path at the variable `$out` with a file or directory to be persisted
 in the Nix store. So I set about doing that.
 
+---
+
 I knew that Hugo sets up some in-situ directories to track build state (things
 like lockfiles, pre-compiled static assets, etc.), so I was going to need a
 temporary working directory to run all this in. I also knew that I would need
@@ -92,6 +96,8 @@ there, and then run `hugo --minify` from that folder to build our site fully.
 With that done, we can finally copy the contents of the `public/` directory to
 the `$out` path in the Nix store.
 
+---
+
 All this comes together to give us a path on the nix store
 (`/nix/store/<hash>-dist/`) with our fully-built and ready-to-deploy website.
 
@@ -129,6 +135,8 @@ formatting)
 Cool. So now, I can run a Nix build in GitHub actions and zip up the contents
 of `public` using their `actions/upload-pages-artifact@v2` action, and deploy
 it to Pages like it was any other tool :)
+
+---
 
 All in all, I'm not sure using Nix for this provides much _raw benefit_ over
 just using a normal CD pipeline to do this (i.e. using their template), but it
