@@ -7,38 +7,38 @@ import { SITE_DESCRIPTION } from '../../consts';
 const posts = (await getCollection('posts')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-
-const isLast = (len: number, idx: number) => {
-  return (len - 1) == idx;
-};
 ---
 
 <Page title={"Posts - hayden's home"} description={SITE_DESCRIPTION}>
-  <header class="content__header">
-    <h1>Posts</h1>
-    <p style="color: var(--base03)">
-      Showing {posts.length} posts of {posts.length}.
-    </p>
-  </header>
+  <div class="-mx-5 flex flex-col">
+    <header class="flex flex-col border-b border-muted pb-5 px-5">
+      <h1 class="font-bold">Posts</h1>
+      <p class="text-[var(--base03)]">
+        Showing {posts.length} posts of {posts.length}.
+      </p>
+    </header>
 
-  {posts.map((post, idx) => (
-    <>
-      <article class="post">
-        <header class="post__header">
-          <h2><a href={`/posts/${post.slug}/`}>{post.data.title}</a></h2>
-          <p class="post__meta">
-            <span class="date">
-              <FormattedDate date={post.data.pubDate} />
-            </span>
-          </p>
-        </header>
-      </article>
+    <div class="">
+    {posts.map((post, _) => (
+      <div class="px-5 py-4 border-b border-muted">
+        <article>
+          <header>
+            <h2 class="text-pink font-bold">
+              <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+            </h2>
+            <p class="text-[var(--base03)]">
+              <span class="date">
+                <FormattedDate date={post.data.pubDate} />
+              </span>
+            </p>
+          </header>
+        </article>
 
-      <section class="post__summary">
-        { post.data.description }
-      </section>
-
-      { !isLast(posts.length, idx) ? <hr /> : null }
-    </>
-  ))}
+        <section class="post__summary">
+          { post.data.description }
+        </section>
+      </div>
+    ))}
+    </div>
+  </div >
 </Page>

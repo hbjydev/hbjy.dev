@@ -11,25 +11,20 @@ const { title, description, pubDate } = data;
 ---
 
 <Page title={`${title} - ${SITE_TITLE}`} description={description}>
-  <header class="content__header">
-    <h1>{title}</h1>
+  <header class="-mx-5 px-5 border-b border-muted pb-5">
+    <h1 class="font-bold">{title}</h1>
+    <span class="text-[var(--base03)]">
+      <FormattedDate date={pubDate} />
+    </span>
+    <p class="text-[var(--base04)]">{description}</p>
   </header>
 
-  <aside></aside>
-
-  <div class="content__body">
-    <hr />
-
+  <div class="prose max-w-5xl py-5">
     <slot />
   </div>
 
   <footer class="content__footer"></footer>
 
   <div class="aside__content" slot="aside">
-    <p>{description}</p>
-    <span style="color: var(--base03)">
-      <FormattedDate date={pubDate} />
-      (<a href={`https://github.com/hbjydev/hbjy.dev/blob/main/src/content/${id}`}>Source</a>)
-    </span>
   </div>
 </Page>

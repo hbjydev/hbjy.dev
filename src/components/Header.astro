@@ -2,18 +2,12 @@
 import { SITE_TITLE } from '../consts';
 ---
 
-<nav class="page__nav main-nav">
-    <ul>
-      <h1 class="page__logo">
-        <a href="/" class="page__logo-inner">{ SITE_TITLE }</a>
-      </h1>
+<nav class="border-b border-muted justify-left divide-x divide-muted [&>a]:py-1 [&>a]:px-4 fixed w-full bg-black flex items-center">
+  <a href="/" class="flex items-center gap-2">
+    { SITE_TITLE }
+    <div class="w-[10px] h-[21px] animate-blink bg-pink"></div>
+  </a>
 
-      <li class="main-nav__item">
-        <a class="nav-main-item" href="/posts">Posts</a>
-      </li>
-
-      <li class="main-nav__item">
-        <a class="nav-main-item" href="/rss.xml">RSS</a>
-      </li>
-    </ul>
+  <a class="hover:text-[var(--base0E)]" href="/posts">posts</a>
+  <a class="hover:text-[var(--base0E)] !border-r border-muted" href="/rss.xml">rss</a>
 </nav>

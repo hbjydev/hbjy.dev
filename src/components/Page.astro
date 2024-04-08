@@ -19,27 +19,19 @@ interface Props {
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
 
-  <body>
-    <div class="page">
+  <body class="bg-black text-white font-mono tracking-normal leading-normal flex flex-col min-h-screen selection:bg-[var(--base0E)] selection:text-black">
+    <div class="flex flex-col flex-grow">
       <Header />
 
-      <section class="page__body">
+      <main class="mt-20 flex flex-col gap-3 px-5 flex-grow">
         <slot>
-      </section>
-
-      <section class="page__aside">
-        <About />
-
-        <slot name="aside">
-      </section>
+      </main>
 
       <footer class="page__footer">
         <Footer />
 
         <slot name="footer">
       </footer>
-
-      <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a651b2be970e42ae99fef0022c3b053d"}'></script>
     </div>
   </body>
 </html>
