@@ -39,7 +39,7 @@
                 cp -r dist $out
               '';
 
-              npmDepsHash = "sha256-Zu9R9+CsN9RY0EOs3uDTdvpsaTJywKugwp0e3sqfAyg=";
+              npmDepsHash = "sha256-gEqAr0bK0gljjgvZZGZvWF4pk7wwGHNlI/1z5q36a8E=";
               npmPackFlags = [ "--ignore-scripts" ];
               NODE_OPTIONS = "--openssl-legacy-provider";
             };
