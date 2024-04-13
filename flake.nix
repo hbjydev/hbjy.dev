@@ -8,14 +8,32 @@
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          inherit (pkgs) nodejs_21 just python3 pkg-config vips buildNpmPackage;
+          inherit (pkgs)
+            buildNpmPackage
+            just
+            nodejs_21
+            pkg-config
+            python3
+            terraform
+            vips
+            ;
           name = "hbjy.dev";
           version = "0.1.0";
         in
         {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
           devShells = {
             default = pkgs.mkShell {
-              buildInputs = [ just ];
+              buildInputs = [
+                just
+                (terraform.withPlugins (ps: [
+                  ps.cloudflare
+                ]))
+              ];
               inputsFrom = [ self'.packages.default ];
             };
           };
