@@ -41,3 +41,10 @@ resource "cloudflare_pages_project" "self" {
     }
   }
 }
+
+resource "cloudflare_record" "self" {
+  zone_id = data.cloudflare_zone.self.zone_id
+  name = "hbjy.dev"
+  type = "CNAME"
+  value = "hbjydev-blog.pages.dev"
+}
