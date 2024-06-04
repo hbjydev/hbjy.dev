@@ -1,6 +1,6 @@
 ---
 title: Prettifying long GitHub Actions scripts
-pubDate: 'Dec 18 2023'
+pubDate: 'Jun 1 2024'
 description: Making long-running scripts look much nicer in GitHub Actions.
 ---
 
