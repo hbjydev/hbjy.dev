@@ -5,7 +5,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 export async function GET(context) {
 	const posts = await getCollection('posts');
 	return rss({
-    stylesheet: '/public/pretty-rss.xsl',
+    stylesheet: '/pretty-rss.xsl',
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
